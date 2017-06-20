@@ -12,16 +12,34 @@ namespace VirtualProofFinal.Models
     {
         public int ID { get; set; }
         public string ProofName { get; set; }
-        public string PaperSize { get; set; }
-        public string Orientation { get; set; }
-        public string ImagePath { get; set; }
 
-        public IEnumerable<SelectListItem> PaperSizes { get; set; }
-        public IEnumerable<SelectListItem> Orientations { get; set; }
+        //using virtual keyword to support lazy loading by entity framework
+        public virtual ICollection<Image> Images { get; set; }
+        public PaperSize Size { get; set; }
+        public Orientation Orientation { get; set; }
     }
 
     public class ProofDbContext : DbContext
     {
         public DbSet<Proof> Proofs { get; set; }
     }
+
+
+    public class Image
+    {
+        public int Id { get; set; }
+        public string Path { get; set; }
+    }
+
+    //since they are constants use an enumeration
+    public enum PaperSize
+    {
+        A6,A5,A4,A3,A2,A1
+    }
+
+    public enum Orientation
+    {
+        Landscape,Portrait
+    }
+
 }

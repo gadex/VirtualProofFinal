@@ -42,14 +42,9 @@ namespace VirtualProofFinal.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var paperSizes = GetAllPaperSizes();
-            var orientations = GetAllOrientations();
-            var model = new Proof();
+           
 
-            model.PaperSizes = GetSelectListItems(paperSizes);
-            model.Orientations = GetSelectListItems(orientations);
-
-            return View(model);
+            return View();
         }
 
         // POST: Proofs/Create
@@ -58,11 +53,7 @@ namespace VirtualProofFinal.Controllers
         public ActionResult Create([Bind(Include = "ID,ProofName,PaperSize,Orientation")] Proof proof, HttpPostedFileBase file)
         {
 
-            var paperSizes = GetAllPaperSizes();
-            var orientations = GetAllOrientations();
-
-            proof.PaperSizes = GetSelectListItems(paperSizes);
-            proof.Orientations = GetSelectListItems(orientations);
+          
 
             if (ModelState.IsValid)
             {
@@ -85,14 +76,16 @@ namespace VirtualProofFinal.Controllers
                     file = Request.Files[i];
                     file.SaveAs(HttpContext.Server.MapPath(savePath)
                                 + file.FileName);
-                    proof.ImagePath = proof.ProofName + file.FileName;
+                    proof.Images.Add(new Models.Image { Path = proof.ProofName + file.FileName });
 
                     //ViewData["ProofName"] = proof.ProofName;
-                    //ViewData["ImagePath"] = proof.ImagePath;
-
-                    filePaths.Add();
+                    filePaths.Add(proof.ProofName + file.FileName);
 
                 }
+
+                //use viewbag a dynamic type
+                ViewBag.ProofName = proof.ProofName;
+                ViewBag.ProofPaths = filePaths;
                 db.Proofs.Add(proof);
                 db.SaveChanges();
                 return RedirectToAction("GeneratePdf");
@@ -155,10 +148,10 @@ namespace VirtualProofFinal.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
-        public ActionResult GeneratePdf(Proof proof)
+        //you dont need that parameter
+        public ActionResult GeneratePdf()
         {
-            ViewData["ProofName"] = proof.ProofName;
+          //  ViewData["ProofName"] = proof.ProofName;
 
             return View(db.Proofs.ToList());
         }
@@ -172,7 +165,7 @@ namespace VirtualProofFinal.Controllers
             base.Dispose(disposing);
         }
 
-        private IEnumerable<string> GetAllPaperSizes()
+        private ICollection<string> GetAllPaperSizes()
         {
             return new List<string>
             {
@@ -185,7 +178,7 @@ namespace VirtualProofFinal.Controllers
             };
         }
 
-        private IEnumerable<string> GetAllOrientations()
+        private ICollection<string> GetAllOrientations()
         {
             return new List<string>
             {

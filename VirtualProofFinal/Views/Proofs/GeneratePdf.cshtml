@@ -1,16 +1,15 @@
-﻿@using Microsoft.AspNet.Identity
-@using VirtualProofFinal.Models
+﻿@using VirtualProofFinal.Models
 @model IEnumerable<VirtualProofFinal.Models.Proof>
 @{
     Layout = "~/Views/Shared/_PdfLayout.cshtml";
     ViewBag.Title = "Generated";
-    
-    var image = new Proof();
-    string userID = @User.Identity.GetUserId();
-    //string proofName = @ViewData["ProofName"].ToString();
-    var imagePath = "/Images/" + userID + "/";
-    var files = Directory.EnumerateFiles(Server.MapPath(imagePath),"*.*", SearchOption.AllDirectories)
-        .Where(s => s.EndsWith(".png") || s.EndsWith(".jpg"));
+    List<string> files = ViewBag.ProofPaths;
+    //var image = new Proof();
+    //string userID = @User.Identity.GetUserId();
+    ////string proofName = @ViewData["ProofName"].ToString();
+    //var imagePath = "/Images/" + userID + "/";
+    //var files = Directory.EnumerateFiles(Server.MapPath(imagePath),"*.*", SearchOption.AllDirectories)
+    //    .Where(s => s.EndsWith(".png") || s.EndsWith(".jpg"));
 }
 
 
@@ -33,14 +32,14 @@
     <img class="generated" src="~/Images/@User.Identity.GetUserId()/@item.ProofName/@item.ImagePath" alt="" />
 }*@
 
-Total images: @files.Count()
+Total images: @files.Count
 @*@foreach (var item in Model.Where(x => x.ImagePath.Contains("Basket")))
 {*@
     
-    @foreach(var file in  files.Where(g => g.Contains("Basket"))){
+    @foreach(var path in files){
     
          <div style="padding:10px">
-             <img src="@imagePath@Path.GetFileName(file)" class="generated" alt="Sample Image" />
+             <img src="@path" class="generated" alt="Sample Image" />
          </div>
      }
 @*}*@

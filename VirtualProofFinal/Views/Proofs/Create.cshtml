@@ -26,7 +26,7 @@
         
         <div class="form-group">
             <div class="control-label col-md-2">
-                @Html.LabelFor(model => model.ImagePath)
+                @Html.LabelFor(model => model.Images)
             </div>
             <div class="col-md-10">
                 <input id="ImagePath" title="Upload a product image" 
@@ -35,17 +35,17 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PaperSize, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Size, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PaperSize, Model.PaperSizes, "- Please select a paper size -", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.PaperSize, "", new { @class = "text-danger" })
+                @Html.EnumDropDownListFor(model => model.Size, "- Please select a paper size -", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Size, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Orientation, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.Orientation, Model.Orientations, "- Please select a paper orientation -", new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.Orientation, "- Please select a paper size -", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Orientation, "", new { @class = "text-danger" })
             </div>
         </div>
