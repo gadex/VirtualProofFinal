@@ -1,0 +1,42 @@
+﻿@model VirtualProofFinal.Models.Proof
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Proof</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProofName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProofName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PaperSize)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PaperSize)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Orientation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orientation)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
