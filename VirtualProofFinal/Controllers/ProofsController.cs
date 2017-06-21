@@ -76,7 +76,8 @@ namespace VirtualProofFinal.Controllers
                     file = Request.Files[i];
                     file.SaveAs(HttpContext.Server.MapPath(savePath)
                                 + file.FileName);
-                    proof.Images.Add(new Models.Image { Path = proof.ProofName + file.FileName });
+                    if (proof.Images != null) proof.Images.Add(new Models.Image { Path = proof.ProofName + file.FileName });
+                    else proof.Images = new List<Models.Image> { new Models.Image { Path = proof.ProofName + file.FileName } };
 
                     //ViewData["ProofName"] = proof.ProofName;
                     filePaths.Add(proof.ProofName + file.FileName);
