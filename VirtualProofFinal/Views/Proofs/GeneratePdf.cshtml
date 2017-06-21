@@ -1,5 +1,5 @@
 ﻿@using VirtualProofFinal.Models
-@model IEnumerable<VirtualProofFinal.Models.Proof>
+@model Proof
 @{
     Layout = "~/Views/Shared/_PdfLayout.cshtml";
     ViewBag.Title = "Generated";
@@ -32,14 +32,15 @@
     <img class="generated" src="~/Images/@User.Identity.GetUserId()/@item.ProofName/@item.ImagePath" alt="" />
 }*@
 
-Total images: @files.Count
+Total images: @Model.Images.Count
 @*@foreach (var item in Model.Where(x => x.ImagePath.Contains("Basket")))
 {*@
     
-    @foreach(var path in files){
-    
+    @foreach(var path in Model.Images)
+    {
+
          <div style="padding:10px">
-             <img src="@path" class="generated" alt="Sample Image" />
+             <img src="@path.Path" class="generated" alt="Sample Image" />
          </div>
      }
 @*}*@

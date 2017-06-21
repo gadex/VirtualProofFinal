@@ -63,8 +63,7 @@ namespace VirtualProofFinal.Controllers
                 //                + file.FileName);
                 //    proof.ImagePath = file.FileName;
                 //}
-                var filePaths = new List<string>();
-
+               
                 for (int i = 0; i < Request.Files.Count; i++)
                 {
                     string savePath = "~/Images/" + @User.Identity.GetUserId() + "/" + @proof.ProofName + "/";
@@ -76,20 +75,19 @@ namespace VirtualProofFinal.Controllers
                     file = Request.Files[i];
                     file.SaveAs(HttpContext.Server.MapPath(savePath)
                                 + file.FileName);
-                    if (proof.Images != null) proof.Images.Add(new Models.Image { Path = proof?.ProofName + file?.FileName });
-                    else proof.Images = new List<Models.Image> { new Models.Image { Path = proof?.ProofName + file?.FileName } };
+                    if (proof.Images != null) proof.Images.Add(new Models.Image { Path = "/Images/" + ((string.IsNullOrEmpty(@User.Identity.GetUserId())) ?  "" : @User.Identity.GetUserId() +"/") + @proof.ProofName + "/"+file.FileName });
+                    else proof.Images = new List<Models.Image> { new Models.Image { Path = "/Images/" + ((string.IsNullOrEmpty(@User.Identity.GetUserId())) ? "" : @User.Identity.GetUserId() + "/") + @proof.ProofName + "/" + file.FileName } };
 
                     //ViewData["ProofName"] = proof.ProofName;
-                    filePaths.Add(proof.ProofName + file.FileName);
+                   
 
                 }
 
                 //use viewbag a dynamic type
-                ViewBag.ProofName = proof.ProofName;
-                ViewBag.ProofPaths = filePaths;
+                
                 db.Proofs.Add(proof);
                 db.SaveChanges();
-                return RedirectToAction("GeneratePdf");
+                return RedirectToAction("GeneratePdf",new { id = proof.ID });
             }
 
             return View(proof);
@@ -150,11 +148,11 @@ namespace VirtualProofFinal.Controllers
             return RedirectToAction("Index");
         }
         //you dont need that parameter
-        public ActionResult GeneratePdf()
+        public ActionResult GeneratePdf(int? id)
         {
-          //  ViewData["ProofName"] = proof.ProofName;
-
-            return View(db.Proofs.ToList());
+            //  ViewData["ProofName"] = proof.ProofName;
+            var proof = db.Proofs.Find(id);
+            return View(proof);
         }
 
         protected override void Dispose(bool disposing)

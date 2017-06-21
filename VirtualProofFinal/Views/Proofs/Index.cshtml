@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.ProofName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.PaperSize)
+            @Html.DisplayNameFor(model => model.Size)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Orientation)
@@ -33,13 +33,13 @@
             @Html.DisplayFor(modelItem => item.ProofName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.PaperSize)
+            @Html.DisplayFor(modelItem => item.Size)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Orientation)
         </td>
         <td>
-            <img class="generated" src="~/Images/@User.Identity.GetUserId()/@item.ProofName/@item.ImagePath" alt="" width="200px" height="auto"/>
+            <img class="generated" src="~/Images/@User.Identity.GetUserId()/@item.ProofName/@item.Images.FirstOrDefault()" alt="" width="200px" height="auto"/>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |

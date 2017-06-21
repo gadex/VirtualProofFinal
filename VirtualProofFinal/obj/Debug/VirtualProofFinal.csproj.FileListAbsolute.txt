@@ -133,6 +133,6 @@ C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\bin\Microsoft.O
 C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\obj\Debug\VirtualProofFinal.csprojResolveAssemblyReference.cache
 C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\obj\Debug\VirtualProofFinal.dll
 C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\obj\Debug\VirtualProofFinal.pdb
+C:\Users\Jaytee\Source\Repos\VirtualProofFinal\VirtualProofFinal\obj\Debug\VirtualProofFinal.csprojResolveAssemblyReference.cache
